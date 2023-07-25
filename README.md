@@ -16,7 +16,7 @@
 
 1. Inside server console, send message from server to client
 
-    iex> Server.produce("foobar")
+        iex> Server.produce("foobar")
 
 And voilá! You should see the message on the client IEx session.
 
