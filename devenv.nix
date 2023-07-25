@@ -2,21 +2,25 @@
 
 {
   # https://devenv.sh/basics/
-  env.GREET = "devenv";
-
-  # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  env.GREET = "devenv kafka_elixir";
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = "echo hello from $GREET";
+  scripts.greeting.exec = "echo You are in $GREET";
+
+  # https://devenv.sh/packages/
+  packages = [
+    pkgs.confluent-platform
+    pkgs.git
+  ];
 
   enterShell = ''
-    hello
-    git --version
+    greeting
+    elixir --version | tail -n +3
   '';
 
   # https://devenv.sh/languages/
-  # languages.nix.enable = true;
+  languages.nix.enable = true;
+  languages.elixir.enable = true;
 
   # https://devenv.sh/pre-commit-hooks/
   # pre-commit.hooks.shellcheck.enable = true;
