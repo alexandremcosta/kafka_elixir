@@ -1,18 +1,14 @@
 defmodule Server do
   @moduledoc """
-  Documentation for `Server`.
+  Produce messages for Kafka using `:brod`.
   """
 
-  @doc """
-  Hello world.
+  def topic, do: "test"
+  def client_id, do: :my_client
+  def hosts, do: [localhost: 9092]
 
-  ## Examples
-
-      iex> Server.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def produce(message) do
+    partition = 0
+    :brod.produce_sync(client_id(), topic(), partition, _key = "", message)
   end
 end

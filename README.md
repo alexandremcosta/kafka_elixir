@@ -6,16 +6,19 @@
 
     Wait 20 seconds to see kafka initialization output
 
-1. Start elixir client
+1. Start elixir client in another terminal
 
-        $ cd client && iex -S mix
+        $ cd client/ && iex -S mix
 
-1. Produce a kafka message
+1. Start elixir server in another terminal
 
-        $ kafka-console-producer --bootstrap-server localhost:9092 --topic test 
-        >{"foo": "bar"}
+        $ cd server/ && iex -S mix
 
-And voilá! You should see the messages on the IEx session.
+1. Inside server console, send message from server to client
+
+    iex> Server.produce("foobar")
+
+And voilá! You should see the message on the client IEx session.
 
 ## Other commands
 

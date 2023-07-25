@@ -32,9 +32,9 @@ defmodule Client.Broadway do
 
   Start client with
 
-      $ iex -S mix` session.
+      $ iex -S mix
 
-  Then produce messages
+  Then produce messages in another terminal
 
       $ kafka-console-producer --bootstrap-server localhost:9092 --topic test 
       >{"foo": "bar"}
@@ -42,14 +42,16 @@ defmodule Client.Broadway do
   Finally you should see the output in the IEx session.
   """
   def handle_message(processor, message, context) do
-    IO.inspect(processor, label: "Processor")
-    IO.inspect(message.data, label: "Message")
-    IO.inspect(message.metadata.topic, label: "Topic")
-    IO.inspect(message.metadata.key, label: "Key")
-    IO.inspect(message.metadata.offset, label: "Offset")
-    IO.inspect(message.metadata.ts, label: "Timestamp")
-    IO.inspect(context, label: "Context")
-    IO.puts("")
+    IO.puts("""
+    * Processor: #{inspect(processor)}
+    * Context: #{inspect(context)}
+    * Message
+      - Key: #{inspect(message.metadata.key)}
+      - Data: #{inspect(message.data)}
+      - Offset: #{inspect(message.metadata.offset)}
+      - Timestamp: #{inspect(message.metadata.ts)}
+      - Topic: #{inspect(message.metadata.topic)}
+    """)
 
     message
   end
